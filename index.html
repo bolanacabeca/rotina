@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Rotina Semanal</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
   :root {
     --bg: #0d0d0d;
     --surface: #161616;
@@ -17,604 +17,473 @@
     --accent3: #f1a135;
     --text: #f0f0f0;
     --muted: #666;
-    --done: #333;
   }
 
-- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-body {
-font-family: ‘DM Sans’, sans-serif;
-background: var(–bg);
-color: var(–text);
-min-height: 100vh;
-padding-bottom: 80px;
-}
-
-/* HEADER */
-.header {
-padding: 28px 20px 20px;
-border-bottom: 1px solid var(–border);
-position: sticky;
-top: 0;
-background: var(–bg);
-z-index: 100;
-}
-
-.header-top {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-}
-
-.header h1 {
-font-family: ‘Syne’, sans-serif;
-font-weight: 800;
-font-size: 22px;
-letter-spacing: -0.5px;
-line-height: 1.1;
-}
-
-.header h1 span { color: var(–accent); }
-
-.week-badge {
-background: var(–surface2);
-border: 1px solid var(–border);
-border-radius: 20px;
-padding: 4px 12px;
-font-size: 11px;
-color: var(–muted);
-font-weight: 500;
-white-space: nowrap;
-}
-
-/* PROGRESS BAR */
-.progress-wrap {
-margin-top: 14px;
-}
-
-.progress-label {
-display: flex;
-justify-content: space-between;
-font-size: 11px;
-color: var(–muted);
-margin-bottom: 6px;
-}
-
-.progress-label strong { color: var(–accent); font-size: 13px; }
-
-.progress-bar {
-height: 4px;
-background: var(–surface2);
-border-radius: 2px;
-overflow: hidden;
-}
-
-.progress-fill {
-height: 100%;
-background: var(–accent);
-border-radius: 2px;
-transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-
-/* NAV DAYS */
-.day-nav {
-display: flex;
-gap: 6px;
-padding: 14px 20px;
-overflow-x: auto;
-scrollbar-width: none;
-border-bottom: 1px solid var(–border);
-}
-
-.day-nav::-webkit-scrollbar { display: none; }
-
-.day-btn {
-flex-shrink: 0;
-padding: 7px 14px;
-border-radius: 20px;
-border: 1px solid var(–border);
-background: transparent;
-color: var(–muted);
-font-family: ‘Syne’, sans-serif;
-font-weight: 700;
-font-size: 12px;
-cursor: pointer;
-transition: all 0.2s;
-position: relative;
-}
-
-.day-btn.active {
-background: var(–accent);
-color: #0d0d0d;
-border-color: var(–accent);
-}
-
-.day-btn .dot {
-position: absolute;
-top: -2px;
-right: -2px;
-width: 6px;
-height: 6px;
-border-radius: 50%;
-background: var(–accent2);
-border: 1px solid var(–bg);
-display: none;
-}
-
-.day-btn.has-done .dot { display: block; }
-.day-btn.active .dot { display: none; }
-
-/* CONTENT */
-.content {
-padding: 20px;
-}
-
-/* DAY VIEW */
-.day-view { display: none; }
-.day-view.active { display: block; }
-
-.day-header {
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 6px;
-}
-
-.day-title {
-font-family: ‘Syne’, sans-serif;
-font-weight: 800;
-font-size: 28px;
-letter-spacing: -1px;
-}
-
-.day-type {
-font-size: 11px;
-padding: 3px 10px;
-border-radius: 20px;
-font-weight: 500;
-letter-spacing: 0.3px;
-}
-
-.type-forca { background: rgba(200,241,53,0.15); color: var(–accent); }
-.type-resist { background: rgba(74,240,196,0.15); color: var(–accent2); }
-.type-livre { background: rgba(241,161,53,0.15); color: var(–accent3); }
-.type-descanso { background: rgba(255,255,255,0.07); color: var(–muted); }
-
-.day-subtitle {
-font-size: 12px;
-color: var(–muted);
-margin-bottom: 20px;
-}
-
-/* SECTION */
-.section {
-margin-bottom: 20px;
-}
-
-.section-label {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-color: var(–muted);
-margin-bottom: 10px;
-}
-
-/* CHECKLIST */
-.checklist {
-display: flex;
-flex-direction: column;
-gap: 2px;
-}
-
-.check-item {
-display: flex;
-align-items: flex-start;
-gap: 12px;
-padding: 12px 14px;
-background: var(–surface);
-border-radius: 10px;
-cursor: pointer;
-transition: all 0.2s;
-border: 1px solid transparent;
-user-select: none;
-}
-
-.check-item:active { transform: scale(0.98); }
-
-.check-item.checked {
-background: var(–surface2);
-border-color: var(–border);
-}
-
-.check-box {
-width: 20px;
-height: 20px;
-border-radius: 6px;
-border: 2px solid var(–border);
-flex-shrink: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: all 0.2s;
-margin-top: 1px;
-}
-
-.check-item.checked .check-box {
-background: var(–accent);
-border-color: var(–accent);
-}
-
-.check-tick {
-display: none;
-font-size: 12px;
-color: #0d0d0d;
-font-weight: 900;
-}
-
-.check-item.checked .check-tick { display: block; }
-
-.check-content { flex: 1; }
-
-.check-label {
-font-size: 14px;
-font-weight: 500;
-line-height: 1.3;
-transition: all 0.2s;
-}
-
-.check-item.checked .check-label {
-color: var(–muted);
-text-decoration: line-through;
-}
-
-.check-sub {
-font-size: 11px;
-color: var(–muted);
-margin-top: 2px;
-line-height: 1.4;
-}
-
-.check-emoji {
-font-size: 16px;
-flex-shrink: 0;
-margin-top: 1px;
-}
-
-/* TREINO CARD */
-.treino-card {
-background: var(–surface);
-border-radius: 12px;
-padding: 16px;
-border: 1px solid var(–border);
-margin-bottom: 20px;
-}
-
-.treino-card-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-bottom: 12px;
-}
-
-.treino-card-title {
-font-family: ‘Syne’, sans-serif;
-font-weight: 700;
-font-size: 13px;
-}
-
-.treino-list {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-.treino-row {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 8px 0;
-border-bottom: 1px solid var(–border);
-}
-
-.treino-row:last-child { border-bottom: none; }
-
-.treino-name { font-size: 13px; }
-
-.treino-sets {
-font-size: 12px;
-color: var(–accent);
-font-weight: 700;
-font-family: ‘Syne’, sans-serif;
-}
-
-/* HORARIO */
-.horario-list {
-display: flex;
-flex-direction: column;
-gap: 2px;
-}
-
-.horario-row {
-display: flex;
-gap: 12px;
-padding: 10px 14px;
-background: var(–surface);
-border-radius: 8px;
-align-items: flex-start;
-}
-
-.horario-time {
-font-family: ‘Syne’, sans-serif;
-font-size: 11px;
-font-weight: 700;
-color: var(–accent);
-white-space: nowrap;
-min-width: 90px;
-padding-top: 1px;
-}
-
-.horario-desc {
-font-size: 13px;
-line-height: 1.4;
-}
-
-/* REGRAS */
-.regras-list {
-display: flex;
-flex-direction: column;
-gap: 2px;
-}
-
-.regra-item {
-display: flex;
-gap: 10px;
-padding: 10px 14px;
-background: var(–surface);
-border-radius: 8px;
-font-size: 13px;
-align-items: center;
-}
-
-.regra-icon { font-size: 15px; flex-shrink: 0; }
-
-/* BOTTOM TABS */
-.bottom-nav {
-position: fixed;
-bottom: 0;
-left: 0;
-right: 0;
-display: flex;
-background: var(–surface);
-border-top: 1px solid var(–border);
-z-index: 200;
-}
-
-.tab-btn {
-flex: 1;
-padding: 12px 4px 10px;
-background: transparent;
-border: none;
-color: var(–muted);
-font-size: 10px;
-font-family: ‘DM Sans’, sans-serif;
-font-weight: 500;
-cursor: pointer;
-transition: color 0.2s;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 3px;
-}
-
-.tab-btn .tab-icon { font-size: 18px; }
-.tab-btn.active { color: var(–accent); }
-
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-
-/* RESET */
-.reset-btn {
-display: block;
-width: 100%;
-padding: 12px;
-background: transparent;
-border: 1px solid var(–border);
-border-radius: 10px;
-color: var(–muted);
-font-size: 13px;
-font-family: ‘DM Sans’, sans-serif;
-cursor: pointer;
-margin-top: 24px;
-transition: all 0.2s;
-}
-
-.reset-btn:active { background: var(–surface2); }
-
-/* META */
-.meta-card {
-background: linear-gradient(135deg, rgba(200,241,53,0.1), rgba(74,240,196,0.05));
-border: 1px solid rgba(200,241,53,0.2);
-border-radius: 14px;
-padding: 20px;
-margin-bottom: 16px;
-}
-
-.meta-card h3 {
-font-family: ‘Syne’, sans-serif;
-font-weight: 800;
-font-size: 16px;
-color: var(–accent);
-margin-bottom: 10px;
-}
-
-.meta-card p {
-font-size: 13px;
-line-height: 1.6;
-color: #ccc;
-}
-
-.meta-card .meta-pct {
-font-family: ‘Syne’, sans-serif;
-font-size: 42px;
-font-weight: 800;
-color: var(–accent);
-display: block;
-margin: 8px 0 4px;
-}
-
-.divider {
-height: 1px;
-background: var(–border);
-margin: 20px 0;
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  .header {
+    padding: 28px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: 'Syne', -apple-system, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  .header h1 span { color: var(--accent); }
+
+  .week-badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .progress-label strong { color: var(--accent); font-size: 13px; }
+
+  .progress-bar {
+    height: 5px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .day-nav {
+    display: flex;
+    gap: 6px;
+    padding: 12px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-nav::-webkit-scrollbar { display: none; }
+
+  .day-btn {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Syne', -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .day-btn.active {
+    background: var(--accent);
+    color: #0d0d0d;
+    border-color: var(--accent);
+  }
+
+  .day-btn.all-done {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .content { padding: 20px; }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .day-title {
+    font-family: 'Syne', -apple-system, sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+
+  .day-type {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .type-forca { background: rgba(200,241,53,0.15); color: var(--accent); }
+  .type-resist { background: rgba(74,240,196,0.15); color: var(--accent2); }
+  .type-livre { background: rgba(241,161,53,0.15); color: var(--accent3); }
+  .type-descanso { background: rgba(255,255,255,0.07); color: var(--muted); }
+
+  .day-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background: var(--surface);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .check-item:active { opacity: 0.7; }
+
+  .check-item.checked {
+    background: var(--surface2);
+    border-color: var(--border);
+  }
+
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-top: 1px;
+    background: var(--surface2);
+  }
+
+  .check-item.checked .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .check-tick {
+    display: none;
+    font-size: 13px;
+    color: #0d0d0d;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .check-item.checked .check-tick { display: block; }
+
+  .check-emoji { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  .check-label {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+    transition: all 0.2s;
+  }
+
+  .check-item.checked .check-label {
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  .check-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  .reset-btn {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    z-index: 200;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 12px 4px 10px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 10px;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    transition: color 0.2s;
+  }
+
+  .tab-btn .tab-icon { font-size: 20px; }
+  .tab-btn.active { color: var(--accent); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .treino-card {
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+  }
+
+  .treino-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .treino-card-title {
+    font-family: 'Syne', -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .treino-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .treino-row:last-child { border-bottom: none; }
+  .treino-sets { color: var(--accent); font-weight: 700; font-size: 12px; }
+
+  .horario-row {
+    display: flex;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border-radius: 10px;
+    margin-bottom: 3px;
+  }
+
+  .horario-time {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 88px;
+    padding-top: 1px;
+  }
+
+  .horario-desc { font-size: 13px; line-height: 1.4; }
+
+  .regra-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border-radius: 10px;
+    font-size: 14px;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+
+  .regra-icon { font-size: 18px; flex-shrink: 0; }
+
+  .meta-card {
+    background: linear-gradient(135deg, rgba(200,241,53,0.12), rgba(74,240,196,0.06));
+    border: 1px solid rgba(200,241,53,0.25);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .meta-card h3 {
+    font-family: 'Syne', -apple-system, sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .meta-pct {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+    margin: 6px 0 4px;
+  }
+
+  .meta-card p { font-size: 13px; line-height: 1.7; color: #bbb; }
+
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+  .section-title {
+    font-family: 'Syne', -apple-system, sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .section-sub { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
 </style>
-
 </head>
 <body>
 
 <div class="header">
   <div class="header-top">
     <h1>Rotina<br><span>Semanal</span></h1>
-    <span class="week-badge" id="weekBadge">Semana —</span>
+    <span class="week-badge" id="weekBadge">—</span>
   </div>
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span>Progresso semanal</span>
-      <strong id="progressText">0 / 35</strong>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill" style="width:0%"></div>
-    </div>
+  <div class="progress-label">
+    <span>Progresso semanal</span>
+    <strong id="progressText">0 / 35</strong>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
-
 <div class="bottom-nav">
-  <button class="tab-btn active" onclick="switchTab('checklist', this)">
+  <button class="tab-btn active" onclick="switchTab('checklist',this)">
     <span class="tab-icon">✅</span>Check
   </button>
-  <button class="tab-btn" onclick="switchTab('treino', this)">
+  <button class="tab-btn" onclick="switchTab('treino',this)">
     <span class="tab-icon">💪</span>Treino
   </button>
-  <button class="tab-btn" onclick="switchTab('horario', this)">
+  <button class="tab-btn" onclick="switchTab('horario',this)">
     <span class="tab-icon">⏰</span>Horário
   </button>
-  <button class="tab-btn" onclick="switchTab('regras', this)">
+  <button class="tab-btn" onclick="switchTab('regras',this)">
     <span class="tab-icon">📏</span>Regras
   </button>
 </div>
-
-<!-- ===== TAB: CHECKLIST ===== -->
 
 <div class="tab-content active" id="tab-checklist">
   <div class="day-nav" id="dayNav"></div>
   <div class="content" id="dayContent"></div>
 </div>
 
-<!-- ===== TAB: TREINO ===== -->
-
 <div class="tab-content" id="tab-treino">
   <div class="content">
-    <div class="day-title" style="margin-bottom:4px">Plano de<br>Treino</div>
-    <div class="day-subtitle" style="margin-bottom:20px">Semana completa</div>
-
-```
-<div class="treino-card">
-  <div class="treino-card-header">
-    <span class="treino-card-title">Segunda — Força</span>
-    <span class="day-type type-forca">Força</span>
-  </div>
-  <div class="treino-list">
-    <div class="treino-row"><span class="treino-name">Flexões</span><span class="treino-sets">3x até falhar</span></div>
-    <div class="treino-row"><span class="treino-name">Agachamentos</span><span class="treino-sets">3×20</span></div>
-    <div class="treino-row"><span class="treino-name">Prancha</span><span class="treino-sets">3×45–60s</span></div>
-    <div class="treino-row"><span class="treino-name">Abdominais</span><span class="treino-sets">3×20</span></div>
-    <div class="treino-row"><span class="treino-name">Saltos</span><span class="treino-sets">3×12</span></div>
-  </div>
-</div>
-
-<div class="treino-card">
-  <div class="treino-card-header">
-    <span class="treino-card-title">Terça — Resistência</span>
-    <span class="day-type type-resist">Cardio</span>
-  </div>
-  <div class="treino-list">
-    <div class="treino-row"><span class="treino-name">Corrida leve</span><span class="treino-sets">10–15 min</span></div>
-    <div class="treino-row"><span class="treino-name">Sprints curtos</span><span class="treino-sets">5 ×</span></div>
-  </div>
-</div>
-
-<div class="treino-card">
-  <div class="treino-card-header">
-    <span class="treino-card-title">Quarta — Força Curto</span>
-    <span class="day-type type-forca">Força</span>
-  </div>
-  <div class="treino-list">
-    <div class="treino-row"><span class="treino-name">Flexões</span><span class="treino-sets">2×</span></div>
-    <div class="treino-row"><span class="treino-name">Agachamentos</span><span class="treino-sets">2×</span></div>
-    <div class="treino-row"><span class="treino-name">Prancha</span><span class="treino-sets">2×</span></div>
-    <div class="treino-row"><span class="treino-name">Abdominais</span><span class="treino-sets">2×</span></div>
-  </div>
-</div>
-
-<div class="treino-card">
-  <div class="treino-card-header">
-    <span class="treino-card-title">Quinta — Resistência</span>
-    <span class="day-type type-resist">Cardio</span>
-  </div>
-  <div class="treino-list">
-    <div class="treino-row"><span class="treino-name">Corrida contínua</span><span class="treino-sets">↑ tempo</span></div>
+    <div class="section-title">Plano de<br>Treino</div>
+    <div class="section-sub">Semana completa</div>
+    <div class="treino-card">
+      <div class="treino-card-header"><span class="treino-card-title">Segunda — Força</span><span class="day-type type-forca">Força</span></div>
+      <div class="treino-row"><span>Flexões</span><span class="treino-sets">3× até falhar</span></div>
+      <div class="treino-row"><span>Agachamentos</span><span class="treino-sets">3×20</span></div>
+      <div class="treino-row"><span>Prancha</span><span class="treino-sets">3×45–60s</span></div>
+      <div class="treino-row"><span>Abdominais</span><span class="treino-sets">3×20</span></div>
+      <div class="treino-row"><span>Saltos</span><span class="treino-sets">3×12</span></div>
+    </div>
+    <div class="treino-card">
+      <div class="treino-card-header"><span class="treino-card-title">Terça — Resistência</span><span class="day-type type-resist">Cardio</span></div>
+      <div class="treino-row"><span>Corrida leve</span><span class="treino-sets">10–15 min</span></div>
+      <div class="treino-row"><span>Sprints curtos</span><span class="treino-sets">5×</span></div>
+    </div>
+    <div class="treino-card">
+      <div class="treino-card-header"><span class="treino-card-title">Quarta — Força Curto</span><span class="day-type type-forca">Força</span></div>
+      <div class="treino-row"><span>Flexões</span><span class="treino-sets">2×</span></div>
+      <div class="treino-row"><span>Agachamentos</span><span class="treino-sets">2×</span></div>
+      <div class="treino-row"><span>Prancha</span><span class="treino-sets">2×</span></div>
+      <div class="treino-row"><span>Abdominais</span><span class="treino-sets">2×</span></div>
+    </div>
+    <div class="treino-card">
+      <div class="treino-card-header"><span class="treino-card-title">Quinta — Resistência</span><span class="day-type type-resist">Cardio</span></div>
+      <div class="treino-row"><span>Corrida contínua</span><span class="treino-sets">↑ tempo</span></div>
+    </div>
+    <div class="treino-card">
+      <div class="treino-card-header"><span class="treino-card-title">Sexta — Força Curto</span><span class="day-type type-forca">Força</span></div>
+      <div class="treino-row"><span>Igual quarta</span><span class="treino-sets">2×</span></div>
+    </div>
+    <div class="treino-card">
+      <div class="treino-card-header"><span class="treino-card-title">Sábado — Livre</span><span class="day-type type-livre">Livre</span></div>
+      <div class="treino-row"><span>Futebol ou corrida leve</span><span class="treino-sets">—</span></div>
+    </div>
+    <div class="treino-card">
+      <div class="treino-card-header"><span class="treino-card-title">Domingo — Descanso</span><span class="day-type type-descanso">Off</span></div>
+      <div class="treino-row"><span style="color:var(--muted)">Recuperação total</span><span class="treino-sets" style="color:var(--muted)">—</span></div>
+    </div>
   </div>
 </div>
-
-<div class="treino-card">
-  <div class="treino-card-header">
-    <span class="treino-card-title">Sexta — Força Curto</span>
-    <span class="day-type type-forca">Força</span>
-  </div>
-  <div class="treino-list">
-    <div class="treino-row"><span class="treino-name">Igual quarta</span><span class="treino-sets">2×</span></div>
-  </div>
-</div>
-
-<div class="treino-card">
-  <div class="treino-card-header">
-    <span class="treino-card-title">Sábado — Livre</span>
-    <span class="day-type type-livre">Livre</span>
-  </div>
-  <div class="treino-list">
-    <div class="treino-row"><span class="treino-name">Futebol ou corrida leve</span><span class="treino-sets">—</span></div>
-  </div>
-</div>
-
-<div class="treino-card">
-  <div class="treino-card-header">
-    <span class="treino-card-title">Domingo — Descanso</span>
-    <span class="day-type type-descanso">Off</span>
-  </div>
-  <div class="treino-list">
-    <div class="treino-row"><span class="treino-name" style="color:var(--muted)">Recuperação total</span><span class="treino-sets" style="color:var(--muted)">—</span></div>
-  </div>
-</div>
-```
-
-  </div>
-</div>
-
-<!-- ===== TAB: HORARIO ===== -->
 
 <div class="tab-content" id="tab-horario">
   <div class="content">
-    <div class="day-title" style="margin-bottom:4px">Horários</div>
-    <div class="day-subtitle" style="margin-bottom:20px">Rotina diária por tipo de dia</div>
-
-```
-<div class="section">
-  <div class="section-label">Segunda · Terça · Quinta</div>
-  <div class="horario-list">
-    <div class="horario-row"><span class="horario-time">07:00–07:40</span><span class="horario-desc">Acordar · PA com proteína · dentes · cara · sair (sem telemóvel)</span></div>
+    <div class="section-title">Horários</div>
+    <div class="section-sub">Rotina por tipo de dia</div>
+    <div class="section-label">Segunda · Terça · Quinta</div>
+    <div class="horario-row"><span class="horario-time">07:00–07:40</span><span class="horario-desc">Acordar · PA com proteína · dentes · cara · sair sem telemóvel</span></div>
     <div class="horario-row"><span class="horario-time">17:05–17:30</span><span class="horario-desc">Lanche + descanso</span></div>
     <div class="horario-row"><span class="horario-time">17:30–18:15</span><span class="horario-desc">💪 Treino</span></div>
     <div class="horario-row"><span class="horario-time">18:15–18:30</span><span class="horario-desc">🚿 Banho</span></div>
@@ -622,14 +491,8 @@ margin: 20px 0;
     <div class="horario-row"><span class="horario-time">21:30–22:30</span><span class="horario-desc">🎬 Bola na Cabeça / estudo</span></div>
     <div class="horario-row"><span class="horario-time">22:30</span><span class="horario-desc">📵 Desligar ecrãs</span></div>
     <div class="horario-row"><span class="horario-time">23:00–23:30</span><span class="horario-desc">😴 Dormir</span></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="section-label">Quarta · Sexta</div>
-  <div class="horario-list">
+    <div class="divider"></div>
+    <div class="section-label">Quarta · Sexta</div>
     <div class="horario-row"><span class="horario-time">13:10–13:40</span><span class="horario-desc">Chegar a casa</span></div>
     <div class="horario-row"><span class="horario-time">13:40–14:10</span><span class="horario-desc">🍽️ Almoço</span></div>
     <div class="horario-row"><span class="horario-time">14:10–14:40</span><span class="horario-desc">Descanso leve (sem telemóvel pesado)</span></div>
@@ -642,38 +505,20 @@ margin: 20px 0;
     <div class="horario-row"><span class="horario-time">21:30–22:30</span><span class="horario-desc">🎬 Bola na Cabeça / estudo</span></div>
     <div class="horario-row"><span class="horario-time">22:30</span><span class="horario-desc">📵 Desligar ecrãs</span></div>
     <div class="horario-row"><span class="horario-time">23:00–23:30</span><span class="horario-desc">😴 Dormir</span></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="section-label">Sábado</div>
-  <div class="horario-list">
+    <div class="divider"></div>
+    <div class="section-label">Sábado</div>
     <div class="horario-row"><span class="horario-time">10:00–10:30</span><span class="horario-desc">Acordar</span></div>
     <div class="horario-row"><span class="horario-time">10:30</span><span class="horario-desc">🍳 Pequeno-almoço</span></div>
     <div class="horario-row"><span class="horario-time">11:30–12:15</span><span class="horario-desc">⚽ Treino livre</span></div>
     <div class="horario-row"><span class="horario-time">Tarde</span><span class="horario-desc">Livre (controlar telemóvel)</span></div>
     <div class="horario-row"><span class="horario-time">Noite</span><span class="horario-desc">Normal · máx. meia-noite 🌙</span></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="section-label">Domingo</div>
-  <div class="horario-list">
+    <div class="divider"></div>
+    <div class="section-label">Domingo</div>
     <div class="horario-row"><span class="horario-time">Até 10:30</span><span class="horario-desc">Acordar</span></div>
     <div class="horario-row"><span class="horario-time">Manhã/Tarde</span><span class="horario-desc">Descanso ou atividade leve</span></div>
     <div class="horario-row"><span class="horario-time">Final do dia</span><span class="horario-desc">📅 Preparar a semana</span></div>
   </div>
 </div>
-```
-
-  </div>
-</div>
-
-<!-- ===== TAB: REGRAS ===== -->
 
 <div class="tab-content" id="tab-regras">
   <div class="content">
@@ -682,25 +527,15 @@ margin: 20px 0;
       <span class="meta-pct">80%</span>
       <p>Se cumprires 80% disto durante 1 mês:<br>→ Ficas mais definido<br>→ Melhoras resistência<br>→ Crias disciplina real</p>
     </div>
-
-```
-<div class="section">
-  <div class="section-label">Regras de ouro</div>
-  <div class="regras-list">
+    <div class="section-label" style="margin-bottom:10px">Regras de ouro</div>
     <div class="regra-item"><span class="regra-icon">🔒</span>Nunca falhar 2 dias seguidos</div>
     <div class="regra-item"><span class="regra-icon">🚿</span>Treino → banho automático a seguir</div>
     <div class="regra-item"><span class="regra-icon">🥚</span>Pequeno-almoço → sempre com proteína</div>
     <div class="regra-item"><span class="regra-icon">📵</span>Sem telemóvel de manhã</div>
     <div class="regra-item"><span class="regra-icon">🌙</span>Sem telemóvel antes de dormir</div>
     <div class="regra-item"><span class="regra-icon">🍬</span>Doces: máximo 1 por dia</div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="section-label">Hábitos diários obrigatórios</div>
-  <div class="regras-list">
+    <div class="divider"></div>
+    <div class="section-label" style="margin-bottom:10px">Hábitos diários</div>
     <div class="regra-item"><span class="regra-icon">🚿</span>Banho todos os dias</div>
     <div class="regra-item"><span class="regra-icon">🦷</span>Dentes manhã + noite</div>
     <div class="regra-item"><span class="regra-icon">🍎</span>1 fruta por dia</div>
@@ -708,216 +543,132 @@ margin: 20px 0;
     <div class="regra-item"><span class="regra-icon">📵</span>Telemóvel: máximo 3h por dia</div>
   </div>
 </div>
-```
-
-  </div>
-</div>
 
 <script>
 const DAYS = [
-  {
-    id: 'seg', label: 'SEG', title: 'Segunda', type: 'Força', typeClass: 'type-forca',
-    subtitle: 'Dia de força completo · Sais às 16:35',
-    checks: [
-      { emoji: '💪', label: 'Treino — Força', sub: 'Flexões 3x · Agachamentos 3x20 · Prancha 3x45s · Abdominais 3x20 · Saltos 3x12' },
-      { emoji: '🚿', label: 'Banho' },
-      { emoji: '🦷', label: 'Dentes (noite)' },
-      { emoji: '🍎', label: '1 fruta' },
-      { emoji: '📵', label: '≤ 3h telemóvel' },
-    ]
-  },
-  {
-    id: 'ter', label: 'TER', title: 'Terça', type: 'Cardio', typeClass: 'type-resist',
-    subtitle: 'Dia de resistência · Sais às 16:35',
-    checks: [
-      { emoji: '🏃', label: 'Treino — Resistência', sub: 'Corrida leve 10–15 min + 5 sprints' },
-      { emoji: '🚿', label: 'Banho' },
-      { emoji: '🦷', label: 'Dentes (noite)' },
-      { emoji: '🍎', label: '1 fruta' },
-      { emoji: '📵', label: '≤ 3h telemóvel' },
-    ]
-  },
-  {
-    id: 'qua', label: 'QUA', title: 'Quarta', type: 'Força', typeClass: 'type-forca',
-    subtitle: 'Centro de estudos à tarde',
-    checks: [
-      { emoji: '💪', label: 'Treino — Força curto', sub: 'Flexões 2x · Agachamentos 2x · Prancha 2x · Abdominais 2x' },
-      { emoji: '🚿', label: 'Banho' },
-      { emoji: '🦷', label: 'Dentes (noite)' },
-      { emoji: '🍎', label: '1 fruta' },
-      { emoji: '📵', label: '≤ 3h telemóvel' },
-    ]
-  },
-  {
-    id: 'qui', label: 'QUI', title: 'Quinta', type: 'Cardio', typeClass: 'type-resist',
-    subtitle: 'Dia de resistência · Sais às 16:35',
-    checks: [
-      { emoji: '🏃', label: 'Treino — Resistência', sub: 'Corrida contínua (tenta aumentar tempo)' },
-      { emoji: '🚿', label: 'Banho' },
-      { emoji: '🦷', label: 'Dentes (noite)' },
-      { emoji: '🍎', label: '1 fruta' },
-      { emoji: '📵', label: '≤ 3h telemóvel' },
-    ]
-  },
-  {
-    id: 'sex', label: 'SEX', title: 'Sexta', type: 'Força', typeClass: 'type-forca',
-    subtitle: 'Centro de estudos à tarde',
-    checks: [
-      { emoji: '💪', label: 'Treino — Força curto', sub: 'Igual quarta · Flexões 2x · Agachamentos 2x · Prancha 2x · Abdominais 2x' },
-      { emoji: '🚿', label: 'Banho' },
-      { emoji: '🦷', label: 'Dentes (noite)' },
-      { emoji: '🍎', label: '1 fruta' },
-      { emoji: '📵', label: '≤ 3h telemóvel' },
-    ]
-  },
-  {
-    id: 'sab', label: 'SÁB', title: 'Sábado', type: 'Livre', typeClass: 'type-livre',
-    subtitle: 'Dia mais livre · Máx. meia-noite',
-    checks: [
-      { emoji: '⚽', label: 'Treino livre', sub: 'Futebol, corrida leve, ou outro' },
-      { emoji: '🚿', label: 'Banho' },
-      { emoji: '🦷', label: 'Dentes (noite)' },
-      { emoji: '🍎', label: '1 fruta' },
-      { emoji: '📵', label: '≤ 3h telemóvel' },
-      { emoji: '🌙', label: 'Deitar antes da meia-noite' },
-    ]
-  },
-  {
-    id: 'dom', label: 'DOM', title: 'Domingo', type: 'Descanso', typeClass: 'type-descanso',
-    subtitle: 'Recuperação · Preparar a semana',
-    checks: [
-      { emoji: '🚿', label: 'Banho' },
-      { emoji: '🦷', label: 'Dentes (noite)' },
-      { emoji: '🍎', label: '1 fruta' },
-      { emoji: '📵', label: '≤ 3h telemóvel' },
-      { emoji: '📅', label: 'Preparar a semana' },
-    ]
-  },
+  { id:'seg', label:'SEG', title:'Segunda', type:'Força', typeClass:'type-forca', subtitle:'Dia de força completo · Sais às 16:35',
+    checks:[
+      {emoji:'💪',label:'Treino — Força',sub:'Flexões 3x · Agachamentos 3x20 · Prancha 3x45s · Abdominais 3x20 · Saltos 3x12'},
+      {emoji:'🚿',label:'Banho'},{emoji:'🦷',label:'Dentes (noite)'},{emoji:'🍎',label:'1 fruta'},{emoji:'📵',label:'≤ 3h telemóvel'},
+    ]},
+  { id:'ter', label:'TER', title:'Terça', type:'Cardio', typeClass:'type-resist', subtitle:'Dia de resistência · Sais às 16:35',
+    checks:[
+      {emoji:'🏃',label:'Treino — Resistência',sub:'Corrida leve 10–15 min + 5 sprints'},
+      {emoji:'🚿',label:'Banho'},{emoji:'🦷',label:'Dentes (noite)'},{emoji:'🍎',label:'1 fruta'},{emoji:'📵',label:'≤ 3h telemóvel'},
+    ]},
+  { id:'qua', label:'QUA', title:'Quarta', type:'Força', typeClass:'type-forca', subtitle:'Centro de estudos à tarde',
+    checks:[
+      {emoji:'💪',label:'Treino — Força curto',sub:'Flexões 2x · Agachamentos 2x · Prancha 2x · Abdominais 2x'},
+      {emoji:'🚿',label:'Banho'},{emoji:'🦷',label:'Dentes (noite)'},{emoji:'🍎',label:'1 fruta'},{emoji:'📵',label:'≤ 3h telemóvel'},
+    ]},
+  { id:'qui', label:'QUI', title:'Quinta', type:'Cardio', typeClass:'type-resist', subtitle:'Dia de resistência · Sais às 16:35',
+    checks:[
+      {emoji:'🏃',label:'Treino — Resistência',sub:'Corrida contínua (aumentar tempo progressivamente)'},
+      {emoji:'🚿',label:'Banho'},{emoji:'🦷',label:'Dentes (noite)'},{emoji:'🍎',label:'1 fruta'},{emoji:'📵',label:'≤ 3h telemóvel'},
+    ]},
+  { id:'sex', label:'SEX', title:'Sexta', type:'Força', typeClass:'type-forca', subtitle:'Centro de estudos à tarde',
+    checks:[
+      {emoji:'💪',label:'Treino — Força curto',sub:'Igual quarta · Flexões 2x · Agachamentos 2x · Prancha 2x · Abdominais 2x'},
+      {emoji:'🚿',label:'Banho'},{emoji:'🦷',label:'Dentes (noite)'},{emoji:'🍎',label:'1 fruta'},{emoji:'📵',label:'≤ 3h telemóvel'},
+    ]},
+  { id:'sab', label:'SÁB', title:'Sábado', type:'Livre', typeClass:'type-livre', subtitle:'Dia mais livre · Máx. meia-noite',
+    checks:[
+      {emoji:'⚽',label:'Treino livre',sub:'Futebol, corrida leve, ou outro'},
+      {emoji:'🚿',label:'Banho'},{emoji:'🦷',label:'Dentes (noite)'},{emoji:'🍎',label:'1 fruta'},
+      {emoji:'📵',label:'≤ 3h telemóvel'},{emoji:'🌙',label:'Deitar antes da meia-noite'},
+    ]},
+  { id:'dom', label:'DOM', title:'Domingo', type:'Descanso', typeClass:'type-descanso', subtitle:'Recuperação · Preparar a semana',
+    checks:[
+      {emoji:'🚿',label:'Banho'},{emoji:'🦷',label:'Dentes (noite)'},{emoji:'🍎',label:'1 fruta'},
+      {emoji:'📵',label:'≤ 3h telemóvel'},{emoji:'📅',label:'Preparar a semana'},
+    ]},
 ];
 
-// State
-let state = JSON.parse(localStorage.getItem('rotina_state') || '{}');
+let state = {};
+try { state = JSON.parse(localStorage.getItem('rotina_v2') || '{}'); } catch(e) {}
 let activeDay = getDefaultDay();
 
 function getDefaultDay() {
-  const d = new Date().getDay(); // 0=Sun,1=Mon...6=Sat
-  const map = [6,0,1,2,3,4,5]; // Sun→6(dom), Mon→0(seg)...
-  return DAYS[map[d]].id;
+  const map = [6,0,1,2,3,4,5];
+  return DAYS[map[new Date().getDay()]].id;
+}
+
+function getWeekKey() {
+  const d = new Date(), s = new Date(d);
+  s.setDate(d.getDate() - d.getDay() + 1);
+  return `w${s.getFullYear()}${String(s.getMonth()+1).padStart(2,'0')}${String(s.getDate()).padStart(2,'0')}`;
 }
 
 function getWeekLabel() {
-  const now = new Date();
-  const start = new Date(now);
-  start.setDate(now.getDate() - now.getDay() + 1);
-  const end = new Date(start);
-  end.setDate(start.getDate() + 6);
-  const fmt = d => d.getDate() + '/' + (d.getMonth()+1);
-  return fmt(start) + ' – ' + fmt(end);
+  const d = new Date(), s = new Date(d);
+  s.setDate(d.getDate() - d.getDay() + 1);
+  const e = new Date(s); e.setDate(s.getDate() + 6);
+  return `${s.getDate()}/${s.getMonth()+1} – ${e.getDate()}/${e.getMonth()+1}`;
 }
 
-function getKey(dayId, idx) { return `${getWeekKey()}_${dayId}_${idx}`; }
-function getWeekKey() {
-  const now = new Date();
-  const start = new Date(now);
-  start.setDate(now.getDate() - now.getDay() + 1);
-  return `w${start.getFullYear()}${String(start.getMonth()+1).padStart(2,'0')}${String(start.getDate()).padStart(2,'0')}`;
-}
+function key(dayId, i) { return `${getWeekKey()}_${dayId}_${i}`; }
+function isChecked(dayId, i) { return !!state[key(dayId, i)]; }
 
-function isChecked(dayId, idx) { return !!state[getKey(dayId, idx)]; }
-function toggle(dayId, idx) {
-  const k = getKey(dayId, idx);
-  state[k] = !state[k];
-  localStorage.setItem('rotina_state', JSON.stringify(state));
+function toggle(dayId, i) {
+  state[key(dayId,i)] = !state[key(dayId,i)];
+  try { localStorage.setItem('rotina_v2', JSON.stringify(state)); } catch(e) {}
   render();
 }
 
-function getTotalChecked() {
-  return DAYS.reduce((t, d) => t + d.checks.filter((_, i) => isChecked(d.id, i)).length, 0);
-}
-function getTotalItems() {
-  return DAYS.reduce((t, d) => t + d.checks.length, 0);
-}
-function getDayChecked(dayId) {
-  const d = DAYS.find(x => x.id === dayId);
-  return d.checks.filter((_, i) => isChecked(dayId, i)).length;
+function resetDay(dayId) {
+  const d = DAYS.find(x => x.id===dayId);
+  d.checks.forEach((_,i) => delete state[key(dayId,i)]);
+  try { localStorage.setItem('rotina_v2', JSON.stringify(state)); } catch(e) {}
+  render();
 }
 
 function render() {
-  // Week badge
   document.getElementById('weekBadge').textContent = getWeekLabel();
-
-  // Progress
-  const checked = getTotalChecked();
-  const total = getTotalItems();
-  const pct = Math.round((checked / total) * 100);
+  let checked=0, total=0;
+  DAYS.forEach(d => d.checks.forEach((_,i) => { total++; if(isChecked(d.id,i)) checked++; }));
   document.getElementById('progressText').textContent = `${checked} / ${total}`;
-  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressFill').style.width = Math.round(checked/total*100)+'%';
 
-  // Day nav
-  const nav = document.getElementById('dayNav');
-  nav.innerHTML = DAYS.map(d => {
-    const done = getDayChecked(d.id);
-    const hasDone = done > 0 && done < d.checks.length;
-    const allDone = done === d.checks.length;
-    return `<button class="day-btn ${d.id === activeDay ? 'active' : ''} ${hasDone ? 'has-done' : ''}"
-      onclick="setDay('${d.id}')">
-      <span class="dot"></span>
-      ${d.label}${allDone ? ' ✓' : ''}
-    </button>`;
+  document.getElementById('dayNav').innerHTML = DAYS.map(d => {
+    const done = d.checks.filter((_,i) => isChecked(d.id,i)).length;
+    const allDone = done===d.checks.length;
+    return `<button class="day-btn ${d.id===activeDay?'active':''} ${allDone&&d.id!==activeDay?'all-done':''}" onclick="setDay('${d.id}')">${d.label}${allDone?' ✓':''}</button>`;
   }).join('');
 
-  // Day content
-  const day = DAYS.find(x => x.id === activeDay);
-  const dayDone = getDayChecked(day.id);
+  const day = DAYS.find(x => x.id===activeDay);
+  const dayDone = day.checks.filter((_,i) => isChecked(day.id,i)).length;
   document.getElementById('dayContent').innerHTML = `
     <div class="day-header">
       <div class="day-title">${day.title}</div>
       <span class="day-type ${day.typeClass}">${day.type}</span>
     </div>
     <div class="day-subtitle">${day.subtitle} · ${dayDone}/${day.checks.length} feitos</div>
-
-    <div class="section">
-      <div class="section-label">Check do dia</div>
-      <div class="checklist">
-        ${day.checks.map((c, i) => `
-          <div class="check-item ${isChecked(day.id, i) ? 'checked' : ''}" onclick="toggle('${day.id}', ${i})">
-            <div class="check-box"><span class="check-tick">✓</span></div>
-            <span class="check-emoji">${c.emoji}</span>
-            <div class="check-content">
-              <div class="check-label">${c.label}</div>
-              ${c.sub ? `<div class="check-sub">${c.sub}</div>` : ''}
-            </div>
+    <div class="section-label">Check do dia</div>
+    <div class="checklist">
+      ${day.checks.map((c,i) => `
+        <div class="check-item ${isChecked(day.id,i)?'checked':''}" onclick="toggle('${day.id}',${i})">
+          <div class="check-box"><span class="check-tick">✓</span></div>
+          <span class="check-emoji">${c.emoji}</span>
+          <div>
+            <div class="check-label">${c.label}</div>
+            ${c.sub?`<div class="check-sub">${c.sub}</div>`:''}
           </div>
-        `).join('')}
-      </div>
+        </div>`).join('')}
     </div>
-
     <button class="reset-btn" onclick="resetDay('${day.id}')">↺ Resetar ${day.title}</button>
   `;
 }
 
-function setDay(id) {
-  activeDay = id;
-  render();
-  document.getElementById('dayContent').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function resetDay(dayId) {
-  const day = DAYS.find(x => x.id === dayId);
-  day.checks.forEach((_, i) => { delete state[getKey(dayId, i)]; });
-  localStorage.setItem('rotina_state', JSON.stringify(state));
-  render();
-}
+function setDay(id) { activeDay=id; render(); }
 
 function switchTab(tab, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
   btn.classList.add('active');
 }
 
 render();
 </script>
-
 </body>
 </html>
