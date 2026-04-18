@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
@@ -7,397 +8,378 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-  :root {
-    --bg: #0d0d0d;
-    --surface: #161616;
-    --surface2: #1e1e1e;
-    --border: #2a2a2a;
-    --accent: #c8f135;
-    --accent2: #4af0c4;
-    --accent3: #f1a135;
-    --text: #f0f0f0;
-    --muted: #666;
-  }
+:root {
+–bg: #0d0d0d;
+–surface: #161616;
+–surface2: #1e1e1e;
+–border: #2a2a2a;
+–accent: #c8f135;
+–accent2: #4af0c4;
+–accent3: #f1a135;
+–red: #f14a4a;
+–text: #f0f0f0;
+–muted: #666;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  body {
-    font-family: 'DM Sans', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: 80px;
-  }
+body {
+font-family: ‘DM Sans’, -apple-system, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+padding-bottom: 80px;
+}
 
-  .header {
-    padding: 28px 20px 16px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 100;
-  }
+.header {
+padding: 28px 20px 16px;
+border-bottom: 1px solid var(–border);
+position: sticky;
+top: 0;
+background: var(–bg);
+z-index: 100;
+}
 
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 14px;
-  }
+.header-top {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 14px;
+}
 
-  .header h1 {
-    font-family: 'Syne', -apple-system, sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    letter-spacing: -0.5px;
-    line-height: 1.1;
-  }
+.header h1 {
+font-family: ‘Syne’, -apple-system, sans-serif;
+font-weight: 800;
+font-size: 22px;
+letter-spacing: -0.5px;
+line-height: 1.1;
+}
 
-  .header h1 span { color: var(--accent); }
+.header h1 span { color: var(–accent); }
 
-  .week-badge {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 11px;
-    color: var(--muted);
-    font-weight: 500;
-  }
+.week-badge {
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 20px;
+padding: 4px 12px;
+font-size: 11px;
+color: var(–muted);
+font-weight: 500;
+}
 
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
+.progress-label {
+display: flex;
+justify-content: space-between;
+font-size: 11px;
+color: var(–muted);
+margin-bottom: 6px;
+}
 
-  .progress-label strong { color: var(--accent); font-size: 13px; }
+.progress-label strong { color: var(–accent); font-size: 13px; }
 
-  .progress-bar {
-    height: 5px;
-    background: var(--surface2);
-    border-radius: 3px;
-    overflow: hidden;
-  }
+.progress-bar {
+height: 5px;
+background: var(–surface2);
+border-radius: 3px;
+overflow: hidden;
+}
 
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 3px;
-    transition: width 0.4s ease;
-  }
+.progress-fill {
+height: 100%;
+background: var(–accent);
+border-radius: 3px;
+transition: width 0.4s ease;
+}
 
-  .day-nav {
-    display: flex;
-    gap: 6px;
-    padding: 12px 20px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    border-bottom: 1px solid var(--border);
-  }
+.day-nav {
+display: flex;
+gap: 6px;
+padding: 12px 20px;
+overflow-x: auto;
+scrollbar-width: none;
+border-bottom: 1px solid var(–border);
+}
 
-  .day-nav::-webkit-scrollbar { display: none; }
+.day-nav::-webkit-scrollbar { display: none; }
 
-  .day-btn {
-    flex-shrink: 0;
-    padding: 7px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    font-family: 'Syne', -apple-system, sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+.day-btn {
+flex-shrink: 0;
+padding: 7px 14px;
+border-radius: 20px;
+border: 1px solid var(–border);
+background: transparent;
+color: var(–muted);
+font-family: ‘Syne’, -apple-system, sans-serif;
+font-weight: 700;
+font-size: 12px;
+cursor: pointer;
+transition: all 0.2s;
+}
 
-  .day-btn.active {
-    background: var(--accent);
-    color: #0d0d0d;
-    border-color: var(--accent);
-  }
+.day-btn.active { background: var(–accent); color: #0d0d0d; border-color: var(–accent); }
+.day-btn.all-done { border-color: var(–accent); color: var(–accent); }
 
-  .day-btn.all-done {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
+.content { padding: 20px; }
 
-  .content { padding: 20px; }
+.day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
 
-  .day-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 4px;
-  }
+.day-title {
+font-family: ‘Syne’, -apple-system, sans-serif;
+font-weight: 800;
+font-size: 30px;
+letter-spacing: -1px;
+}
 
-  .day-title {
-    font-family: 'Syne', -apple-system, sans-serif;
-    font-weight: 800;
-    font-size: 30px;
-    letter-spacing: -1px;
-  }
+.day-type { font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+.type-forca { background: rgba(200,241,53,0.15); color: var(–accent); }
+.type-resist { background: rgba(74,240,196,0.15); color: var(–accent2); }
+.type-livre { background: rgba(241,161,53,0.15); color: var(–accent3); }
+.type-descanso { background: rgba(255,255,255,0.07); color: var(–muted); }
 
-  .day-type {
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: 600;
-  }
+.day-subtitle { font-size: 12px; color: var(–muted); margin-bottom: 22px; }
 
-  .type-forca { background: rgba(200,241,53,0.15); color: var(--accent); }
-  .type-resist { background: rgba(74,240,196,0.15); color: var(--accent2); }
-  .type-livre { background: rgba(241,161,53,0.15); color: var(--accent3); }
-  .type-descanso { background: rgba(255,255,255,0.07); color: var(--muted); }
+.section-label {
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 10px;
+}
 
-  .day-subtitle {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 22px;
-  }
+.checklist { display: flex; flex-direction: column; gap: 3px; }
 
-  .section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
+.check-item {
+display: flex;
+align-items: flex-start;
+gap: 12px;
+padding: 14px;
+background: var(–surface);
+border-radius: 12px;
+cursor: pointer;
+transition: all 0.2s;
+border: 1px solid transparent;
+user-select: none;
+-webkit-user-select: none;
+}
 
-  .checklist {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
+.check-item:active { opacity: 0.7; }
+.check-item.checked { background: var(–surface2); border-color: var(–border); }
 
-  .check-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px;
-    background: var(--surface);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 1px solid transparent;
-    user-select: none;
-    -webkit-user-select: none;
-  }
+.check-box {
+width: 22px;
+height: 22px;
+border-radius: 7px;
+border: 2px solid var(–border);
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.2s;
+margin-top: 1px;
+background: var(–surface2);
+}
 
-  .check-item:active { opacity: 0.7; }
+.check-item.checked .check-box { background: var(–accent); border-color: var(–accent); }
 
-  .check-item.checked {
-    background: var(--surface2);
-    border-color: var(--border);
-  }
+.check-tick { display: none; font-size: 13px; color: #0d0d0d; font-weight: 900; line-height: 1; }
+.check-item.checked .check-tick { display: block; }
 
-  .check-box {
-    width: 22px;
-    height: 22px;
-    border-radius: 7px;
-    border: 2px solid var(--border);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    margin-top: 1px;
-    background: var(--surface2);
-  }
+.check-emoji { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
 
-  .check-item.checked .check-box {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
+.check-label { font-size: 15px; font-weight: 500; line-height: 1.3; transition: all 0.2s; }
+.check-item.checked .check-label { color: var(–muted); text-decoration: line-through; }
+.check-sub { font-size: 11px; color: var(–muted); margin-top: 3px; line-height: 1.4; }
 
-  .check-tick {
-    display: none;
-    font-size: 13px;
-    color: #0d0d0d;
-    font-weight: 900;
-    line-height: 1;
-  }
+.reset-btn {
+display: block;
+width: 100%;
+padding: 13px;
+background: transparent;
+border: 1px solid var(–border);
+border-radius: 12px;
+color: var(–muted);
+font-size: 13px;
+font-family: ‘DM Sans’, -apple-system, sans-serif;
+cursor: pointer;
+margin-top: 20px;
+}
 
-  .check-item.checked .check-tick { display: block; }
+.bottom-nav {
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+display: flex;
+background: var(–surface);
+border-top: 1px solid var(–border);
+z-index: 200;
+padding-bottom: env(safe-area-inset-bottom);
+}
 
-  .check-emoji { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.tab-btn {
+flex: 1;
+padding: 12px 4px 10px;
+background: transparent;
+border: none;
+color: var(–muted);
+font-size: 10px;
+font-family: ‘DM Sans’, -apple-system, sans-serif;
+font-weight: 500;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 3px;
+transition: color 0.2s;
+}
 
-  .check-label {
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.3;
-    transition: all 0.2s;
-  }
+.tab-btn .tab-icon { font-size: 20px; }
+.tab-btn.active { color: var(–accent); }
 
-  .check-item.checked .check-label {
-    color: var(--muted);
-    text-decoration: line-through;
-  }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
-  .check-sub {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 3px;
-    line-height: 1.4;
-  }
+/* TREINO */
+.treino-card { background: var(–surface); border-radius: 14px; padding: 16px; border: 1px solid var(–border); margin-bottom: 10px; }
+.treino-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.treino-card-title { font-family: ‘Syne’, -apple-system, sans-serif; font-weight: 700; font-size: 13px; }
+.treino-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(–border); font-size: 13px; }
+.treino-row:last-child { border-bottom: none; }
+.treino-sets { color: var(–accent); font-weight: 700; font-size: 12px; }
 
-  .reset-btn {
-    display: block;
-    width: 100%;
-    padding: 13px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: var(--muted);
-    font-size: 13px;
-    font-family: 'DM Sans', -apple-system, sans-serif;
-    cursor: pointer;
-    margin-top: 20px;
-  }
+/* HORARIO */
+.horario-row { display: flex; gap: 12px; padding: 10px 14px; background: var(–surface); border-radius: 10px; margin-bottom: 3px; }
+.horario-time { font-size: 11px; font-weight: 700; color: var(–accent); white-space: nowrap; min-width: 88px; padding-top: 1px; }
+.horario-desc { font-size: 13px; line-height: 1.4; }
 
-  .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    z-index: 200;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+/* REGRAS */
+.regra-item { display: flex; gap: 12px; padding: 12px 14px; background: var(–surface); border-radius: 10px; font-size: 14px; align-items: center; margin-bottom: 3px; }
+.regra-icon { font-size: 18px; flex-shrink: 0; }
 
-  .tab-btn {
-    flex: 1;
-    padding: 12px 4px 10px;
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    font-size: 10px;
-    font-family: 'DM Sans', -apple-system, sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    transition: color 0.2s;
-  }
+.meta-card { background: linear-gradient(135deg, rgba(200,241,53,0.12), rgba(74,240,196,0.06)); border: 1px solid rgba(200,241,53,0.25); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+.meta-card h3 { font-family: ‘Syne’, -apple-system, sans-serif; font-weight: 800; font-size: 16px; color: var(–accent); margin-bottom: 8px; }
+.meta-pct { font-size: 48px; font-weight: 800; color: var(–accent); display: block; margin: 6px 0 4px; }
+.meta-card p { font-size: 13px; line-height: 1.7; color: #bbb; }
 
-  .tab-btn .tab-icon { font-size: 20px; }
-  .tab-btn.active { color: var(--accent); }
+.divider { height: 1px; background: var(–border); margin: 20px 0; }
+.section-title { font-family: ‘Syne’, -apple-system, sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.5px; margin-bottom: 4px; }
+.section-sub { font-size: 12px; color: var(–muted); margin-bottom: 20px; }
 
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+/* HISTÓRICO */
+.hist-empty {
+text-align: center;
+padding: 60px 20px;
+color: var(–muted);
+font-size: 14px;
+line-height: 1.7;
+}
 
-  .treino-card {
-    background: var(--surface);
-    border-radius: 14px;
-    padding: 16px;
-    border: 1px solid var(--border);
-    margin-bottom: 10px;
-  }
+.hist-empty .hist-icon { font-size: 40px; display: block; margin-bottom: 12px; }
 
-  .treino-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-  }
+.hist-week {
+background: var(–surface);
+border-radius: 14px;
+padding: 16px;
+border: 1px solid var(–border);
+margin-bottom: 10px;
+}
 
-  .treino-card-title {
-    font-family: 'Syne', -apple-system, sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-  }
+.hist-week-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 12px;
+}
 
-  .treino-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 9px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
+.hist-week-label {
+font-family: ‘Syne’, -apple-system, sans-serif;
+font-weight: 700;
+font-size: 13px;
+}
 
-  .treino-row:last-child { border-bottom: none; }
-  .treino-sets { color: var(--accent); font-weight: 700; font-size: 12px; }
+.hist-pct {
+font-family: ‘Syne’, -apple-system, sans-serif;
+font-weight: 800;
+font-size: 20px;
+}
 
-  .horario-row {
-    display: flex;
-    gap: 12px;
-    padding: 10px 14px;
-    background: var(--surface);
-    border-radius: 10px;
-    margin-bottom: 3px;
-  }
+.hist-bar {
+height: 6px;
+background: var(–surface2);
+border-radius: 3px;
+overflow: hidden;
+margin-bottom: 10px;
+}
 
-  .horario-time {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent);
-    white-space: nowrap;
-    min-width: 88px;
-    padding-top: 1px;
-  }
+.hist-bar-fill {
+height: 100%;
+border-radius: 3px;
+transition: width 0.4s ease;
+}
 
-  .horario-desc { font-size: 13px; line-height: 1.4; }
+.hist-days {
+display: flex;
+gap: 4px;
+}
 
-  .regra-item {
-    display: flex;
-    gap: 12px;
-    padding: 12px 14px;
-    background: var(--surface);
-    border-radius: 10px;
-    font-size: 14px;
-    align-items: center;
-    margin-bottom: 3px;
-  }
+.hist-day-dot {
+flex: 1;
+height: 28px;
+border-radius: 6px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 9px;
+font-weight: 700;
+color: var(–muted);
+background: var(–surface2);
+flex-direction: column;
+gap: 2px;
+}
 
-  .regra-icon { font-size: 18px; flex-shrink: 0; }
+.hist-day-dot.done { background: rgba(200,241,53,0.15); color: var(–accent); }
+.hist-day-dot.partial { background: rgba(241,161,53,0.15); color: var(–accent3); }
 
-  .meta-card {
-    background: linear-gradient(135deg, rgba(200,241,53,0.12), rgba(74,240,196,0.06));
-    border: 1px solid rgba(200,241,53,0.25);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
+.hist-streak {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-top: 10px;
+padding-top: 10px;
+border-top: 1px solid var(–border);
+font-size: 12px;
+color: var(–muted);
+}
 
-  .meta-card h3 {
-    font-family: 'Syne', -apple-system, sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
+.hist-streak strong { color: var(–text); }
 
-  .meta-pct {
-    font-size: 48px;
-    font-weight: 800;
-    color: var(--accent);
-    display: block;
-    margin: 6px 0 4px;
-  }
+.summary-cards {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 8px;
+margin-bottom: 20px;
+}
 
-  .meta-card p { font-size: 13px; line-height: 1.7; color: #bbb; }
+.summary-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 16px;
+text-align: center;
+}
 
-  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+.summary-card .s-num {
+font-family: ‘Syne’, -apple-system, sans-serif;
+font-weight: 800;
+font-size: 28px;
+display: block;
+margin-bottom: 4px;
+}
 
-  .section-title {
-    font-family: 'Syne', -apple-system, sans-serif;
-    font-weight: 800;
-    font-size: 26px;
-    letter-spacing: -0.5px;
-    margin-bottom: 4px;
-  }
-
-  .section-sub { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+.summary-card .s-label { font-size: 11px; color: var(–muted); }
 </style>
+
 </head>
 <body>
 
@@ -416,24 +398,21 @@
 </div>
 
 <div class="bottom-nav">
-  <button class="tab-btn active" onclick="switchTab('checklist',this)">
-    <span class="tab-icon">✅</span>Check
-  </button>
-  <button class="tab-btn" onclick="switchTab('treino',this)">
-    <span class="tab-icon">💪</span>Treino
-  </button>
-  <button class="tab-btn" onclick="switchTab('horario',this)">
-    <span class="tab-icon">⏰</span>Horário
-  </button>
-  <button class="tab-btn" onclick="switchTab('regras',this)">
-    <span class="tab-icon">📏</span>Regras
-  </button>
+  <button class="tab-btn active" onclick="switchTab('checklist',this)"><span class="tab-icon">✅</span>Check</button>
+  <button class="tab-btn" onclick="switchTab('treino',this)"><span class="tab-icon">💪</span>Treino</button>
+  <button class="tab-btn" onclick="switchTab('horario',this)"><span class="tab-icon">⏰</span>Horário</button>
+  <button class="tab-btn" onclick="switchTab('regras',this)"><span class="tab-icon">📏</span>Regras</button>
+  <button class="tab-btn" onclick="switchTab('historico',this)"><span class="tab-icon">📊</span>Histórico</button>
 </div>
+
+<!-- CHECKLIST -->
 
 <div class="tab-content active" id="tab-checklist">
   <div class="day-nav" id="dayNav"></div>
   <div class="content" id="dayContent"></div>
 </div>
+
+<!-- TREINO -->
 
 <div class="tab-content" id="tab-treino">
   <div class="content">
@@ -478,6 +457,8 @@
   </div>
 </div>
 
+<!-- HORARIO -->
+
 <div class="tab-content" id="tab-horario">
   <div class="content">
     <div class="section-title">Horários</div>
@@ -520,6 +501,8 @@
   </div>
 </div>
 
+<!-- REGRAS -->
+
 <div class="tab-content" id="tab-regras">
   <div class="content">
     <div class="meta-card">
@@ -541,6 +524,17 @@
     <div class="regra-item"><span class="regra-icon">🍎</span>1 fruta por dia</div>
     <div class="regra-item"><span class="regra-icon">🍬</span>Doces: máximo 1 por dia</div>
     <div class="regra-item"><span class="regra-icon">📵</span>Telemóvel: máximo 3h por dia</div>
+  </div>
+</div>
+
+<!-- HISTÓRICO -->
+
+<div class="tab-content" id="tab-historico">
+  <div class="content">
+    <div class="section-title">Histórico</div>
+    <div class="section-sub">Registo semanal de cumprimento</div>
+    <div id="histSummary"></div>
+    <div id="histList"></div>
   </div>
 </div>
 
@@ -584,8 +578,114 @@ const DAYS = [
     ]},
 ];
 
+// ─── STORAGE ─────────────────────────────────────────────────────────────────
 let state = {};
-try { state = JSON.parse(localStorage.getItem('rotina_v2') || '{}'); } catch(e) {}
+let history = [];
+
+try { state = JSON.parse(localStorage.getItem('rotina_state') || '{}'); } catch(e) {}
+try { history = JSON.parse(localStorage.getItem('rotina_history') || '[]'); } catch(e) {}
+
+function save() {
+  try {
+    localStorage.setItem('rotina_state', JSON.stringify(state));
+    localStorage.setItem('rotina_history', JSON.stringify(history));
+  } catch(e) {}
+}
+
+// ─── WEEK KEY ─────────────────────────────────────────────────────────────────
+function getWeekStart(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = (day === 0) ? -6 : 1 - day; // Monday as start
+  d.setDate(d.getDate() + diff);
+  d.setHours(0,0,0,0);
+  return d;
+}
+
+function weekKey(date) {
+  const s = getWeekStart(date || new Date());
+  return `w${s.getFullYear()}${String(s.getMonth()+1).padStart(2,'0')}${String(s.getDate()).padStart(2,'0')}`;
+}
+
+function weekLabel(wk) {
+  const y = parseInt(wk.slice(1,5));
+  const m = parseInt(wk.slice(5,7)) - 1;
+  const d = parseInt(wk.slice(7,9));
+  const start = new Date(y, m, d);
+  const end = new Date(start);
+  end.setDate(start.getDate() + 6);
+  return `${start.getDate()}/${start.getMonth()+1} – ${end.getDate()}/${end.getMonth()+1}`;
+}
+
+function currentWeekKey() { return weekKey(new Date()); }
+
+// ─── AUTO-RESET: archive last week if it's a new week ────────────────────────
+function checkWeekRollover() {
+  const currentWk = currentWeekKey();
+  const lastWk = localStorage.getItem('rotina_last_week');
+
+  if (lastWk && lastWk !== currentWk) {
+    // Archive last week
+    const wkState = {};
+    Object.keys(state).forEach(k => {
+      if (k.startsWith(lastWk)) wkState[k] = state[k];
+    });
+
+    // Calculate stats for last week
+    let checked = 0, total = 0;
+    const dayStats = {};
+    DAYS.forEach(d => {
+      let dc = 0;
+      d.checks.forEach((_, i) => {
+        total++;
+        const k = `${lastWk}_${d.id}_${i}`;
+        if (wkState[k]) { checked++; dc++; }
+      });
+      dayStats[d.id] = { done: dc, total: d.checks.length };
+    });
+
+    const pct = total > 0 ? Math.round(checked / total * 100) : 0;
+
+    history.unshift({
+      wk: lastWk,
+      label: weekLabel(lastWk),
+      pct,
+      checked,
+      total,
+      days: dayStats
+    });
+
+    // Keep max 12 weeks
+    if (history.length > 12) history = history.slice(0, 12);
+
+    // Clear old week from state
+    Object.keys(state).forEach(k => {
+      if (k.startsWith(lastWk)) delete state[k];
+    });
+  }
+
+  localStorage.setItem('rotina_last_week', currentWk);
+  save();
+}
+
+// ─── STATE HELPERS ────────────────────────────────────────────────────────────
+function key(dayId, i) { return `${currentWeekKey()}_${dayId}_${i}`; }
+function isChecked(dayId, i) { return !!state[key(dayId, i)]; }
+
+function toggle(dayId, i) {
+  state[key(dayId, i)] = !state[key(dayId, i)];
+  save();
+  render();
+}
+
+function resetDay(dayId) {
+  const d = DAYS.find(x => x.id === dayId);
+  d.checks.forEach((_, i) => delete state[key(dayId, i)]);
+  save();
+  render();
+}
+
+// ─── UI ───────────────────────────────────────────────────────────────────────
 let activeDay = getDefaultDay();
 
 function getDefaultDay() {
@@ -593,50 +693,35 @@ function getDefaultDay() {
   return DAYS[map[new Date().getDay()]].id;
 }
 
-function getWeekKey() {
-  const d = new Date(), s = new Date(d);
-  s.setDate(d.getDate() - d.getDay() + 1);
-  return `w${s.getFullYear()}${String(s.getMonth()+1).padStart(2,'0')}${String(s.getDate()).padStart(2,'0')}`;
+function getWeekLabelCurrent() {
+  const wk = currentWeekKey();
+  return weekLabel(wk);
 }
 
-function getWeekLabel() {
-  const d = new Date(), s = new Date(d);
-  s.setDate(d.getDate() - d.getDay() + 1);
-  const e = new Date(s); e.setDate(s.getDate() + 6);
-  return `${s.getDate()}/${s.getMonth()+1} – ${e.getDate()}/${e.getMonth()+1}`;
-}
-
-function key(dayId, i) { return `${getWeekKey()}_${dayId}_${i}`; }
-function isChecked(dayId, i) { return !!state[key(dayId, i)]; }
-
-function toggle(dayId, i) {
-  state[key(dayId,i)] = !state[key(dayId,i)];
-  try { localStorage.setItem('rotina_v2', JSON.stringify(state)); } catch(e) {}
-  render();
-}
-
-function resetDay(dayId) {
-  const d = DAYS.find(x => x.id===dayId);
-  d.checks.forEach((_,i) => delete state[key(dayId,i)]);
-  try { localStorage.setItem('rotina_v2', JSON.stringify(state)); } catch(e) {}
-  render();
+function pctColor(pct) {
+  if (pct >= 80) return 'var(--accent)';
+  if (pct >= 50) return 'var(--accent3)';
+  return 'var(--red)';
 }
 
 function render() {
-  document.getElementById('weekBadge').textContent = getWeekLabel();
-  let checked=0, total=0;
-  DAYS.forEach(d => d.checks.forEach((_,i) => { total++; if(isChecked(d.id,i)) checked++; }));
+  // Header
+  document.getElementById('weekBadge').textContent = getWeekLabelCurrent();
+  let checked = 0, total = 0;
+  DAYS.forEach(d => d.checks.forEach((_, i) => { total++; if (isChecked(d.id, i)) checked++; }));
   document.getElementById('progressText').textContent = `${checked} / ${total}`;
-  document.getElementById('progressFill').style.width = Math.round(checked/total*100)+'%';
+  document.getElementById('progressFill').style.width = Math.round(checked / total * 100) + '%';
 
+  // Day nav
   document.getElementById('dayNav').innerHTML = DAYS.map(d => {
-    const done = d.checks.filter((_,i) => isChecked(d.id,i)).length;
-    const allDone = done===d.checks.length;
+    const done = d.checks.filter((_, i) => isChecked(d.id, i)).length;
+    const allDone = done === d.checks.length;
     return `<button class="day-btn ${d.id===activeDay?'active':''} ${allDone&&d.id!==activeDay?'all-done':''}" onclick="setDay('${d.id}')">${d.label}${allDone?' ✓':''}</button>`;
   }).join('');
 
-  const day = DAYS.find(x => x.id===activeDay);
-  const dayDone = day.checks.filter((_,i) => isChecked(day.id,i)).length;
+  // Day content
+  const day = DAYS.find(x => x.id === activeDay);
+  const dayDone = day.checks.filter((_, i) => isChecked(day.id, i)).length;
   document.getElementById('dayContent').innerHTML = `
     <div class="day-header">
       <div class="day-title">${day.title}</div>
@@ -645,7 +730,7 @@ function render() {
     <div class="day-subtitle">${day.subtitle} · ${dayDone}/${day.checks.length} feitos</div>
     <div class="section-label">Check do dia</div>
     <div class="checklist">
-      ${day.checks.map((c,i) => `
+      ${day.checks.map((c, i) => `
         <div class="check-item ${isChecked(day.id,i)?'checked':''}" onclick="toggle('${day.id}',${i})">
           <div class="check-box"><span class="check-tick">✓</span></div>
           <span class="check-emoji">${c.emoji}</span>
@@ -657,15 +742,96 @@ function render() {
     </div>
     <button class="reset-btn" onclick="resetDay('${day.id}')">↺ Resetar ${day.title}</button>
   `;
+
+  // History
+  renderHistory();
 }
 
-function setDay(id) { activeDay=id; render(); }
+function renderHistory() {
+  const summaryEl = document.getElementById('histSummary');
+  const listEl = document.getElementById('histList');
+
+  if (history.length === 0) {
+    summaryEl.innerHTML = '';
+    listEl.innerHTML = `
+      <div class="hist-empty">
+        <span class="hist-icon">📊</span>
+        O histórico vai aparecer aqui<br>no final de cada semana.<br><br>
+        <span style="color:#444">Começa esta semana e volta aqui daqui a 7 dias.</span>
+      </div>`;
+    return;
+  }
+
+  // Summary cards
+  const avgPct = Math.round(history.reduce((s, w) => s + w.pct, 0) / history.length);
+  const best = history.reduce((b, w) => w.pct > b.pct ? w : b, history[0]);
+  const above80 = history.filter(w => w.pct >= 80).length;
+
+  summaryEl.innerHTML = `
+    <div class="summary-cards">
+      <div class="summary-card">
+        <span class="s-num" style="color:${pctColor(avgPct)}">${avgPct}%</span>
+        <span class="s-label">Média geral</span>
+      </div>
+      <div class="summary-card">
+        <span class="s-num" style="color:var(--accent)">${above80}</span>
+        <span class="s-label">Semanas ≥ 80%</span>
+      </div>
+      <div class="summary-card">
+        <span class="s-num" style="color:var(--accent)">${best.pct}%</span>
+        <span class="s-label">Melhor semana</span>
+      </div>
+      <div class="summary-card">
+        <span class="s-num" style="color:var(--text)">${history.length}</span>
+        <span class="s-label">Semanas registadas</span>
+      </div>
+    </div>
+    <div class="divider"></div>
+  `;
+
+  listEl.innerHTML = history.map(w => {
+    const color = pctColor(w.pct);
+    const dayDots = DAYS.map(d => {
+      const ds = w.days[d.id];
+      if (!ds) return `<div class="hist-day-dot"><span>${d.label}</span></div>`;
+      const allDone = ds.done === ds.total;
+      const partial = ds.done > 0 && !allDone;
+      return `<div class="hist-day-dot ${allDone?'done':partial?'partial':''}"><span>${d.label}</span></div>`;
+    }).join('');
+
+    return `
+      <div class="hist-week">
+        <div class="hist-week-header">
+          <span class="hist-week-label">${w.label}</span>
+          <span class="hist-pct" style="color:${color}">${w.pct}%</span>
+        </div>
+        <div class="hist-bar">
+          <div class="hist-bar-fill" style="width:${w.pct}%;background:${color}"></div>
+        </div>
+        <div class="hist-days">${dayDots}</div>
+        <div class="hist-streak">
+          <span>${w.checked} de ${w.total} tarefas · ${w.pct >= 80 ? '✅ Meta atingida' : w.pct >= 50 ? '⚡ Quase lá' : '❌ Abaixo da meta'}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function setDay(id) { activeDay = id; render(); }
 
 function switchTab(tab, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   btn.classList.add('active');
+}
+
+// Init
+checkWeekRollover();
+render();
+</script>
+
+</body>
+</html>
 }
 
 render();
